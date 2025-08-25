@@ -1,0 +1,7 @@
+课后作业1
+////出现的问题：void VectorDotProduct( Vector3D &V1, Vector3D &V2,int &product) 和void VectorGet(Vector3D &V,int i,int &value) 这两个函数中product和value前面没有加&，导致没有传递下来，只是传下来一个副本，对于引用传递和数据传递要搞好区分
+
+课后作业2
+////对于指针的使用理解不够清晰，有的时候用着用着就忘了是*p还是p了，
+在定义这个InitSpaceVector上第一次没有输出一直不知道哪里的原因就重新换了个做法，进行定义的时候一开始忘了分配空间；
+释放的时候把指针域也释放了导致没法继续释放；

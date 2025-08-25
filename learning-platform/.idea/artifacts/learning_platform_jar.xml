@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="learning-platform:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/learning_platform_jar</output-path>
+    <root id="archive" name="learning-platform.jar" />
+  </artifact>
+</component>

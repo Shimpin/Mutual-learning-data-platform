@@ -1,0 +1,78 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习资料求助平台</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>学习资料求助与分享平台</h1>
+    <nav>
+        <a href="#home">首页</a>
+        <a href="#upload">上传资料</a>
+        <a href="#help">求助问题</a>
+        <a href="#comments">评论</a>
+        <button id="logoutBtn">登出</button>
+    </nav>
+</header>
+
+<main>
+    <section id="home">
+        <h2>欢迎来到学习资料求助与分享平台</h2>
+        <p>在这里，你可以分享学习资料，提问问题，进行评论讨论。</p>
+    </section>
+
+    <!-- 上传文件表单 -->
+    <section id="upload">
+        <h2>上传资料</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <textarea name="description" placeholder="文件描述" required></textarea>
+            <button type="submit">上传文件</button>
+        </form>
+    </section>
+
+    <!-- 搜索功能 -->
+    <section id="search">
+        <h2>搜索学习资料和问题</h2>
+        <input type="text" id="searchKeyword" placeholder="搜索资料">
+        <button onclick="search()">搜索</button>
+        <div id="searchResults"></div>
+    </section>
+
+    <!-- 显示评论 -->
+    <section id="comments">
+        <h2>评论区</h2>
+        <div id="commentList">
+            <!-- 评论内容会动态加载在这里 -->
+        </div>
+        <form id="commentForm">
+            <textarea name="comment" placeholder="写下你的评论" required></textarea>
+            <button type="submit">提交评论</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>© 2024 学习资料求助与分享平台</p>
+</footer>
+
+<script src="app.js"></script>
+<script>
+    // 页面加载时检查是否已登录
+    if (!localStorage.getItem('token')) {
+        // 未登录，跳转到登录页面
+        window.location.href = 'login.html';
+    }
+
+    // 登出功能
+    document.getElementById('logoutBtn').addEventListener('click', function () {
+        localStorage.removeItem('token');
+        window.location.href = 'login.html'; // 跳转回登录页面
+    });
+</script>
+</body>
+</html>

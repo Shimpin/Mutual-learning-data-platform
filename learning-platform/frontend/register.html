@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>注册</h1>
+</header>
+
+<main>
+    <section id="register">
+        <h2>注册一个账户</h2>
+        <form id="registerForm">
+            <input type="text" name="username" placeholder="用户名" required><br>
+            <input type="password" name="password" placeholder="密码" required><br>
+            <input type="email" name="email" placeholder="电子邮件" required><br>
+            <button type="submit">注册</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>© 2024 学习资料求助与分享平台</p>
+</footer>
+
+<script src="app.js"></script>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const username = event.target.username.value;
+        const password = event.target.password.value;
+        const email = event.target.email.value;
+
+        fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password, email }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === '用户注册成功，请登录') {
+                    // 注册成功，跳转到登录页面
+                    window.location.href = 'login.html';
+                } else {
+                    alert(data.message); // 提示错误信息
+                }
+            })
+            .catch(error => console.error('注册失败:', error));
+    });
+</script>
+</body>
+</html>

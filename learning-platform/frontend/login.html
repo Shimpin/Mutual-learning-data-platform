@@ -1,0 +1,61 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>登录</h1>
+</header>
+
+<main>
+  <section id="login">
+    <h2>登录到学习资料求助平台</h2>
+    <form id="loginForm">
+      <input type="text" name="username" placeholder="用户名" required><br>
+      <input type="password" name="password" placeholder="密码" required><br>
+      <button type="submit">登录</button>
+    </form>
+    <p>还没有账号？<a href="register.html">注册一个新账号</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2024 学习资料求助与分享平台</p>
+</footer>
+
+<script src="app.js"></script>
+<script>
+  // 登录表单提交处理
+  document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.token) {
+                // 登录成功，存储 token 并跳转到主页面
+                localStorage.setItem('token', data.token);
+                window.location.href = 'index.html';
+              } else {
+                alert(data.message); // 提示错误信息
+              }
+            })
+            .catch(error => console.error('登录失败:', error));
+  });
+</script>
+</body>
+</html>
